@@ -1,5 +1,5 @@
 from Modals.Base import TABLES
-from Modals.User import USERS
+from Modals.Users import USERS
 from Modals.Sessions import SESSIONS
 import asyncio
 
