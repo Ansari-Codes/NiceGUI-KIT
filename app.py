@@ -1,4 +1,4 @@
-from nicegui import ui, app as server, context
+from nicegui import ui as nui, app as server, context
 
 NAME = "NiceKIT"
 FAVICON = "👌"
