@@ -1,4 +1,4 @@
-from Classes.Base import Variable, VGroup, Success
+from Classes.Base import Variable, VGroup, Response
 from Core.utils import verifyMail, verifyPswd, verifyUsername
 
 class LoginData(VGroup):
@@ -17,17 +17,15 @@ class LoginData(VGroup):
         self.error_labels = {}
 
     def verify(self):
-        sc = Success()
-        sc['identifier'] = None
-        sc['password'] = None
+        sc = Response()
         if not self.identifier.__str__().strip():
-            sc["identifier"] = "Identifier is required!"
+            sc.errors["identifier"] = "Identifier is required!"
             if "identifier" in self.error_labels:
-                self.error_labels["identifier"].set_text(sc['identifier'])
+                self.error_labels["identifier"].set_text(sc.errors)
         if not self.password.__str__().strip():
-            sc["password"] = "Password is required!"
+            sc.errors["password"] = "Password is required!"
             if "password" in self.error_labels:
-                self.error_labels["password"].set_text(sc['password'])
+                self.error_labels["password"].set_text(sc.errors['password'])
         return sc
 
     def get_data(self):
@@ -59,34 +57,34 @@ class SignupData(VGroup):
         self.error_labels = {}
 
     def verify(self):
-        sc = Success()
-        sc["name"] = None
-        sc["email"] = None
-        sc["password"] = None
-        sc["confirm"] = None
+        sc = Response()
+        sc.errors["name"] = None
+        sc.errors["email"] = None
+        sc.errors["password"] = None
+        sc.errors["confirm"] = None
         name = str(self.name).strip()
         email = str(self.email).strip()
         password = str(self.password).strip()
         confirm = str(self.confirm).strip()
         if not name:
-            sc["name"] = "Name is required!"
+            sc.errors["name"] = "Name is required!"
         elif not verifyUsername(name):
-            sc["name"] = "Invalid username!"
+            sc.errors["name"] = "Invalid username!"
         if not email:
-            sc["email"] = "Email is required!"
+            sc.errors["email"] = "Email is required!"
         elif not verifyMail(email):
-            sc["email"] = "Invalid email address!"
+            sc.errors["email"] = "Invalid email address!"
         if not password:
-            sc["password"] = "Password is required!"
+            sc.errors["password"] = "Password is required!"
         elif not verifyPswd(password):
-            sc["password"] = "Password is too weak!"
+            sc.errors["password"] = "Password is too weak!"
         if not confirm:
-            sc["confirm"] = "Confirm password is required!"
+            sc.errors["confirm"] = "Confirm password is required!"
         elif confirm != password:
-            sc["confirm"] = "Passwords do not match!"
-        for field in sc:
-            if sc[field] and (field in self.error_labels):
-                self.error_labels[field].set_text(sc[field])
+            sc.errors["confirm"] = "Passwords do not match!"
+        for field in sc.errors:
+            if sc.errors[field] and (field in self.error_labels):
+                self.error_labels[field].set_text(sc.errors[field])
         return sc
 
     def get_data(self):

@@ -1,6 +1,7 @@
 from nicegui import Client
 from app import nui
 from typing import Callable, Literal
+from Classes.Base import Variable
 
 def navigate(link:str,new_tab:bool=False):nui.navigate.to(link,new_tab)
 def Label(text="", model=None, model_configs=None):
@@ -10,6 +11,7 @@ def Label(text="", model=None, model_configs=None):
         lbl.bind_text(model, target_name='value', **model_configs)
     return lbl
 
+def Div(): return nui.element('Div')
 def Header(): return nui.header(fixed=True, elevated=False)
 def Html(html: str): return nui.html(html, sanitize=lambda x:x)
 def Col(): return nui.column()
@@ -20,6 +22,8 @@ def Center(): return nui.element( ).classes("flex justify-center items-center" )
 def Footer(config: dict|None = None): return nui.footer(**(config or {}))
 def Card(align: Literal['start', 'end', 'center', 'baseline', 'stretch']|None = None ):
     return nui.card(align_items=align).classes("bg-card-l dark:bg-card-d")
+def CardSec(): return nui.card_section()
+def CardAct(): return nui.card_actions()
 
 def Link(
         text: str = "",
