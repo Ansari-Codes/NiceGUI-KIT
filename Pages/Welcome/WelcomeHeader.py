@@ -1,6 +1,6 @@
-from ui import Header, RawRow, AddSpace,navBar, Label, Button, Link
+from ui import Header, RawRow, AddSpace,navBar, Label, Button
 from app import NAME, FAVICON
-from Pages import DASHBOARD, LOGIN, SIGNUP
+from Pages import DASHBOARD, LOGIN, SIGNUP, SESSION_DEL
 from Backend.Auth.Session import get_current_user
 
 async def addButtons(res, desktop, mobile):
@@ -13,8 +13,12 @@ async def addButtons(res, desktop, mobile):
             Button("LogIn", link=LOGIN)
             Button("SignUp", link=SIGNUP)
     else:
-        with desktop: Button("Dashboard", link=DASHBOARD)
-        with mobile: Button("Dashboard", link=DASHBOARD)
+        with desktop: 
+            Button("Dashboard", link=DASHBOARD)
+            Button("LogOUT", link=SESSION_DEL)
+        with mobile: 
+            Button("Dashboard", link=DASHBOARD)
+            Button("LogOUT", link=SESSION_DEL)
     desktop.update()
     mobile.update()
 
