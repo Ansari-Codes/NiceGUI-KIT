@@ -27,6 +27,8 @@ def Card(align: Literal['start', 'end', 'center', 'baseline', 'stretch']|None = 
     return nui.card(align_items=align).classes("bg-card-l dark:bg-card-d gap-1 p-3")
 def CardSec(): return nui.card_section()
 def CardAct(): return nui.card_actions()
+def Drawer(side: Literal['left', 'right'] = 'left', **kwargs): 
+    return nui.drawer(side, **kwargs)
 
 def Link(
         text: str = "",
@@ -89,7 +91,7 @@ def Button(
         btn.props(f'href="{link}"')
     if new_tab:
         btn.props(f'target="_blank"')
-    return btn
+    return btn.props("glossy")
 
 def TextArea(
         content: str = "",

@@ -15,10 +15,8 @@ async def addButtons(res, desktop, mobile):
     else:
         with desktop: 
             Button("Dashboard", link=DASHBOARD)
-            Button("LogOUT", link=SESSION_DEL)
         with mobile: 
             Button("Dashboard", link=DASHBOARD)
-            Button("LogOUT", link=SESSION_DEL)
     desktop.update()
     mobile.update()
 
