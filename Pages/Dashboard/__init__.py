@@ -60,7 +60,7 @@ async def create_dashboard(request: Request, page: str = "dashboard"):
     await app.context.client.connected()
     dark = request.cookies.get("dark", None)
     DarkMode(thecode(request.cookies.get("dark", None)))
-    area = Div()
+    area = Div().classes("w-full h-full")
     drawer = await SideDrawer(area, request=request)
     with area:
         if page in functions:
